@@ -103,8 +103,14 @@ def stats(rows):
         topics[r["topic"]] = topics.get(r["topic"], 0) + 1
     print(f"Trickiest topic: {max(topics, key=topics.get)}")
 
-    week = sum(1 for r in rows
-               if (datetime.now() - datetime.strptime(r["date"], "%Y-%m-%d")).days < 7)
+    week = 0
+    for r in rows:
+        try:
+            d = datetime.strptime(r["date"], "%Y-%m-%d")
+        except ValueError:
+            continue  # skip rows with a bad date
+        if (datetime.now() - d).days < 7:
+            week += 1
     print(f"Bugs in the last 7 days: {week}")
 
 
