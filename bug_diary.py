@@ -139,9 +139,9 @@ def main():
     rows = load_rows()
     actions = {"1": add_bug, "2": lambda r: show(r), "3": search,
                "4": stats, "5": delete_bug}
+    print(MENU)  # menu is shown only once
     while True:
-        print(MENU)
-        choice = input("Choose: ").strip()
+        choice = input("\nChoose (0-5): ").strip()
         if choice == "0":
             print("Keep debugging, keep growing!")
             break
